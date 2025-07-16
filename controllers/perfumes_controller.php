@@ -18,17 +18,34 @@ class PerfumesController {
     }
 
     public function guardar() {
-        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $this->modelo->crear(
-                $_POST['nombre'],
-                $_POST['genero'],
-                $_POST['notas_olfativas'],
-                $_POST['presentacion'],
-                $_POST['categoria']
-            );
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        require_once __DIR__ . '/../helpers/validacion.php';
+
+        $nombre = limpiar($_POST['nombre'] ?? '');
+        $genero = limpiar($_POST['genero'] ?? '');
+        $notas = limpiar($_POST['notas_olfativas'] ?? '');
+        $presentacion = intval($_POST['presentacion'] ?? 0);
+        $categoria = limpiar($_POST['categoria'] ?? '');
+
+        $errores = [];
+
+        if (empty($nombre) || strlen($nombre) > 100) $errores[] = "Nombre inválido.";
+        if (!validarGenero($genero)) $errores[] = "Género inválido.";
+        if (!validarPresentacion($presentacion)) $errores[] = "Presentación fuera de rango.";
+        if (!validarCategoria($categoria)) $errores[] = "Categoría inválida.";
+
+        if (!empty($errores)) {
+            // Mostrar errores directamente o redirigir con mensaje
+            echo "<div class='alert alert-danger'>" . implode("<br>", $errores) . "</div>";
+            return;
         }
+
+        $this->modelo->crear($nombre, $genero, $notas, $presentacion, $categoria);
         header('Location: index.php?controller=perfumes&action=index');
+        exit;
     }
+}
+
 
     public function eliminar() {
         if (isset($_GET['id'])) {
@@ -55,15 +72,31 @@ class PerfumesController {
 
     public function actualizar() {
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-        $this->modelo->actualizar(
-            $_POST['id'],
-            $_POST['nombre'],
-            $_POST['genero'],
-            $_POST['notas_olfativas'],
-            $_POST['presentacion'],
-            $_POST['categoria']
-        );
+        require_once __DIR__ . '/../helpers/validacion.php';
+
+        $id = intval($_POST['id']);
+        $nombre = limpiar($_POST['nombre']);
+        $genero = limpiar($_POST['genero']);
+        $notas = limpiar($_POST['notas_olfativas']);
+        $presentacion = intval($_POST['presentacion']);
+        $categoria = limpiar($_POST['categoria']);
+
+        $errores = [];
+
+        if ($id <= 0) $errores[] = "ID inválido.";
+        if (empty($nombre) || strlen($nombre) > 100) $errores[] = "Nombre inválido.";
+        if (!validarGenero($genero)) $errores[] = "Género inválido.";
+        if (!validarPresentacion($presentacion)) $errores[] = "Presentación fuera de rango.";
+        if (!validarCategoria($categoria)) $errores[] = "Categoría inválida.";
+
+        if (!empty($errores)) {
+            echo "<div class='alert alert-danger'>" . implode("<br>", $errores) . "</div>";
+            return;
+        }
+
+        $this->modelo->actualizar($id, $nombre, $genero, $notas, $presentacion, $categoria);
+        header('Location: index.php?controller=perfumes&action=index');
+        exit;
     }
-    header('Location: index.php?controller=perfumes&action=index');
 }
 }

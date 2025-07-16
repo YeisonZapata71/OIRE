@@ -8,6 +8,10 @@ require_once __DIR__ . '/../../helpers/permisos.php';
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>OIRË Admin</title>
+  <meta name="description" content="Sistema de gestión de perfumes OIRË">
+  <meta name="author" content="Yeison Dariel Zapata Monsalve">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
 
   <!-- Estilos globales -->
   <link rel="stylesheet" href="https://oire.devsolutionsweb.com/app/assets/css/styles.css">
@@ -78,7 +82,8 @@ require_once __DIR__ . '/../../helpers/permisos.php';
         <?php if (tienePermiso('inventario', 'ver')): ?>
         <li><a href="index.php?controller=inventario&action=index" class="nav-link text-white <?= $moduloActivo === 'inventario' ? 'active' : '' ?>"><i class="bi bi-archive me-2"></i>Inventario</a></li>
         <?php endif; ?>
-            <li class="mt-4 border-top pt-3"><a href="logout.php" class="nav-link text-white"><i class="bi bi-box-arrow-right me-2"></i> Cerrar sesión </a></li>
+        <li><a href="index.php?controller=contacto&action=index" class="nav-link text-white <?= $moduloActivo === 'contacto' ? 'active' : '' ?>"><i class="bi bi-envelope me-2"></i>Contacto</a></li>
+        <li class="mt-4 border-top pt-3"><a href="logout.php" class="nav-link text-white"><i class="bi bi-box-arrow-right me-2"></i> Cerrar sesión </a></li>
       </ul>
     </div>
   </div>

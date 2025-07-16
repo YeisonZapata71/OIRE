@@ -13,14 +13,17 @@ class Usuario {
     }
 
     public function crear($datos) {
-        $stmt = $this->db->prepare("INSERT INTO usuarios (nombre, correo, clave, rol) VALUES (:nombre, :correo, :clave, :rol)");
-        return $stmt->execute([
-            ':nombre' => $datos['nombre'],
-            ':correo' => $datos['correo'],
-            ':clave' => $datos['clave'],
-            ':rol' => $datos['rol']
-        ]);
-    }
+    // Encriptar la clave antes de guardarla
+    $claveHash = password_hash($datos['clave'], PASSWORD_BCRYPT);
+
+    $stmt = $this->db->prepare("INSERT INTO usuarios (nombre, correo, clave, rol) VALUES (:nombre, :correo, :clave, :rol)");
+    return $stmt->execute([
+        ':nombre' => $datos['nombre'],
+        ':correo' => $datos['correo'],
+        ':clave' => $claveHash, // Guardar hash
+        ':rol' => $datos['rol']
+    ]);
+}
 
     public function eliminar($id) {
         $stmt = $this->db->prepare("DELETE FROM usuarios WHERE id = :id");

@@ -65,3 +65,37 @@
 </a>
 
 <?php require_once __DIR__ . '/../partials/footer.php'; ?>
+
+<style>
+/* Transición de fondo suave al hacer hover sobre la fila de la tabla */
+.table-hover tbody tr:hover {
+    background-color: #e9f7ef;
+    transition: background-color 0.3s ease-in-out;
+}
+
+/* Animación pop */
+@keyframes pop {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.08); }
+    100% { transform: scale(1); }
+}
+.btn-animado {
+    animation: pop 0.3s ease;
+}
+</style>
+
+<script>
+// Aplica clase animada al botón Agregar al hacer clic
+document.addEventListener("DOMContentLoaded", function () {
+    const btnAgregar = document.querySelector('button.btn-success');
+    if (btnAgregar) {
+        btnAgregar.addEventListener("click", function () {
+            btnAgregar.classList.add("btn-animado");
+            setTimeout(() => {
+                btnAgregar.classList.remove("btn-animado");
+            }, 300);
+        });
+    }
+});
+</script>
+

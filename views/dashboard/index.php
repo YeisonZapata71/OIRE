@@ -3,6 +3,28 @@
         <h1 class="display-6"><i class="bi bi-speedometer2"></i> Bienvenido al panel de OIRË Perfumería</h1>
         <p class="lead">Aquí podrás gestionar insumos, fórmulas, perfumes, producción y pedidos de forma modular y eficiente.</p>
         <hr>
+        <div id="sliderDashboard" class="carousel slide my-4" data-bs-ride="carousel">
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <img src="assets/img/slider1.png" class="d-block w-100 rounded" alt="Perfumería 1">
+    </div>
+    <div class="carousel-item">
+      <img src="assets/img/slider2.png" class="d-block w-100 rounded" alt="Perfumería 2">
+    </div>
+    <div class="carousel-item">
+      <img src="assets/img/slider3.png" class="d-block w-100 rounded" alt="Perfumería 3">
+    </div>
+  </div>
+  <button class="carousel-control-prev" type="button" data-bs-target="#sliderDashboard" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Anterior</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#sliderDashboard" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Siguiente</span>
+  </button>
+</div>
+
         <p class="text-muted">Sistema modular v1.0 | Desarrollado por Yeison Zapata Monsalve</p>
     </div>
 </div>

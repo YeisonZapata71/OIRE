@@ -98,25 +98,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <body class="bg-light d-flex justify-content-center align-items-center" style="height: 100vh;">
   <div class="card p-4 shadow" style="min-width: 350px;">
     <h5 class="mb-3 text-center">Iniciar sesión</h5>
-  <?php require_once __DIR__ . '/helpers/csrf.php'; ?>
-  <form method="POST" action="">
-    <input type="hidden" name="csrf_token" value="<?= generarTokenCSRF(); ?>">
-
-    <div class="mb-3">
-      <label for="correo" class="form-label">Correo electrónico</label>
-      <input type="email" class="form-control" id="correo" name="correo" required>
-    </div>
-
-    <div class="mb-3">
-      <label for="clave" class="form-label">Contraseña</label>
-      <input type="password" class="form-control" id="clave" name="clave" required>
-    </div>
-
-    <div class="d-grid">
-      <button type="submit" class="btn btn-dark">Iniciar sesión</button>
-    </div>
-  </form>
-
     <?php if ($error): ?>
       <div class="alert alert-danger"><?= $error ?></div>
     <?php endif; ?>
